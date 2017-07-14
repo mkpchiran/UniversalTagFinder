@@ -40,7 +40,7 @@ public class Cli {
                 try {
                     String path = cmd.getOptionValue("p");
                     String query = cmd.getOptionValue("q");
-                    new Extactor().getURNs(path, query);
+                    new Extactor().getElements(path, query);
                 } catch (Exception e) {
                     log.log(Level.SEVERE, e.getMessage());
                     help();

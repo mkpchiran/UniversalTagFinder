@@ -7,7 +7,7 @@ To build
 mvn clean install
 
 To run
-java -jar target/TagFinder-1.0-SNAPSHOT-jar-with-dependencies.jar -p [directory path] -q [css query]
+java -jar target/TagFinder.jar -p [directory path] -q [css query]
 
 output
 
