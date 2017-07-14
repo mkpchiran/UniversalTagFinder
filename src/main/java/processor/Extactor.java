@@ -32,24 +32,35 @@ public class Extactor {
                     try {
                         Document doc = Jsoup.parse(p, "UTF-8");
                         Elements elements = doc.select(PATTERN);
+                        if(elements.size()>0)
+                        System.out.println("*************************************************************");
+
 //                        List<String> ids = divs.stream().map(n ->
 //                                n.attr("id")
 //                        ).collect(Collectors.toList());
                         elementsList.addAll(elements);
                         elements.forEach(element -> {
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             log.log(Level.INFO, p.getName() + " : \n" + element.toString());
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 //                            System.out.println(p.getName()+" : "+element.toString());
 
                         });
                         total[0] += elements.size();
+                       if(elements.size()>0) {
+                            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 //                        System.out.println(p.getName()+" has  "+elements.size()+" elements");
-                        log.log(Level.INFO, p.getName() + " has  " + elements.size() + " elements");
-
+                            log.log(Level.INFO, p.getName() + " has  " + elements.size() + " elements");
+                            System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                        }
+                        if(elements.size()>0)
+                        System.out.println("*************************************************************");
                     } catch (IOException e) {
                         log.log(Level.SEVERE, e.getMessage());
 
                         e.printStackTrace();
                     }
+
                 }
         );
 //        System.out.println(bookPath + " has  " + total[0] + " elements");
