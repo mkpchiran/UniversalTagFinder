@@ -22,6 +22,7 @@ public class Cli {
         options.addOption("h", "help", false, "show help.");
         options.addOption("p", "directory", true, "Directory Path");
         options.addOption("q", "query", true, "css query");
+        options.addOption("o", "outer", true, "outer html on ");
 
     }
 
@@ -34,13 +35,19 @@ public class Cli {
 
             if (cmd.hasOption("h"))
                 help();
+            boolean withParent=false;
+            if (cmd.hasOption("o")){
+                if(cmd.getOptionValue("o").equalsIgnoreCase("on")){
+                    withParent=true;
+                }
+            }
 
             if (cmd.hasOption("q") && cmd.hasOption("p")) {
 
                 try {
                     String path = cmd.getOptionValue("p");
                     String query = cmd.getOptionValue("q");
-                    new Extactor().getElements(path, query);
+                    new Extactor().getElements(path, query,withParent);
                 } catch (Exception e) {
                     log.log(Level.SEVERE, e.getMessage());
                     help();

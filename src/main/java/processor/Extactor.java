@@ -23,7 +23,7 @@ public class Extactor {
 
     private String PATTERN = ".";
 
-    public List<Element> getElements(String bookPath, String pattern) throws Exception {
+    public List<Element> getElements(String bookPath, String pattern,boolean withparent) throws Exception {
         PATTERN = pattern;
         final int[] total = {0};
         List<Element> elementsList = new ArrayList<>();
@@ -41,7 +41,11 @@ public class Extactor {
                         elementsList.addAll(elements);
                         elements.forEach(element -> {
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                            log.log(Level.INFO, p.getName() + " : \n" + element.toString());
+                            if(withparent) {
+                                log.log(Level.INFO, p.getName() + " : \n" + element.parent().toString());
+                            }else {
+                                log.log(Level.INFO, p.getName() + " : \n" + element.toString());
+                            }
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 //                            System.out.println(p.getName()+" : "+element.toString());
 
