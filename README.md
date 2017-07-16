@@ -19,3 +19,11 @@ INFO: Using cli argument -p=directory
 Jul 14, 2017 11:51:10 AM parser.Cli parse
 INFO: Using cli argument -q=query
 
+usage: Main
+ -h,--help              show help.
+ -o,--outer <arg>       outer html off
+ -p,--directory <arg>   Directory Path
+ -q,--query <arg>       css query
+                        for more info about css selectors visit
+                        https://www.w3schools.com/cssref/css_selectors.asp
+ -r,--result <arg>      get result print on off
