@@ -15,9 +15,9 @@ import java.util.List;
 
 public class ExtractorTest {
 
-    @Test(expected = Exception.class)
+    @Test
     public void getElements() throws Exception {
-        URL path = ExtractorTest.class.getClassLoader().getResource("test-files/knowledgeCheck");
+        URL path = ExtractorTest.class.getClassLoader().getResource("test-files");
         Extactor extactor = new Extactor();
         List<Element> elements = extactor.getElements(path.getPath(),"p",true,false);
         Assert.assertTrue(elements.size()>0);

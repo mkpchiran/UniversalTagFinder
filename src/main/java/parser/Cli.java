@@ -29,7 +29,7 @@ public class Cli {
 
     }
 
-    public void parse() {
+    public boolean parse() {
         CommandLineParser parser = new DefaultParser();
 
         CommandLine cmd = null;
@@ -59,6 +59,7 @@ public class Cli {
                     String path = cmd.getOptionValue("p");
                     String query = cmd.getOptionValue("q");
                     new Extactor().getElements(path, query, withParent, withResut);
+                    return true;
                 } catch (Exception e) {
                     log.log(Level.SEVERE, e.getMessage());
                     help();
@@ -86,10 +87,14 @@ public class Cli {
                 help();
             }
 
+            return true;
+
 
         } catch (ParseException e) {
+
             log.log(Level.SEVERE, "Failed to parse comand line properties", e.getMessage());
             help();
+            return false;
         }
     }
 
