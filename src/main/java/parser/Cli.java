@@ -20,14 +20,17 @@ public class Cli {
         this.args = args;
 
         options.addOption("h", "help", false, "show help.");
+        //https://www.w3schools.com/cssref/css_selectors.asp
         options.addOption("p", "directory", true, "Directory Path");
-        options.addOption("q", "query", true, "css query");
-        options.addOption("o", "outer", true, "outer html on ");
+        options.addOption("q", "query", true, "css query \n" +
+                "for more info about css selectors visit https://www.w3schools.com/cssref/css_selectors.asp");
+        options.addOption("o", "outer", true, "outer html off ");
+        options.addOption("r", "result", true, "get result print on off");
 
     }
 
     public void parse() {
-        CommandLineParser parser = new BasicParser();
+        CommandLineParser parser = new DefaultParser();
 
         CommandLine cmd = null;
         try {
@@ -35,11 +38,19 @@ public class Cli {
 
             if (cmd.hasOption("h"))
                 help();
-            boolean withParent=false;
-            if (cmd.hasOption("o")){
-                if(cmd.getOptionValue("o").equalsIgnoreCase("on")){
-                    withParent=true;
+            boolean withParent = true;
+            boolean withResut = false;
+            if (cmd.hasOption("o")) {
+                if (cmd.getOptionValue("o").equalsIgnoreCase("off")) {
+                    withParent = false;
                 }
+            }
+
+            if (cmd.hasOption("r")) {
+                if (cmd.getOptionValue("r").equalsIgnoreCase("on")) {
+                    withResut = true;
+                }
+
             }
 
             if (cmd.hasOption("q") && cmd.hasOption("p")) {
@@ -47,7 +58,7 @@ public class Cli {
                 try {
                     String path = cmd.getOptionValue("p");
                     String query = cmd.getOptionValue("q");
-                    new Extactor().getElements(path, query,withParent);
+                    new Extactor().getElements(path, query, withParent, withResut);
                 } catch (Exception e) {
                     log.log(Level.SEVERE, e.getMessage());
                     help();
@@ -87,6 +98,7 @@ public class Cli {
         HelpFormatter formater = new HelpFormatter();
 
         formater.printHelp("Main", options);
+
         System.exit(0);
     }
 }
