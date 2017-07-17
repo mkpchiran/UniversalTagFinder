@@ -3,6 +3,8 @@ package parser;
 import org.apache.commons.cli.*;
 import processor.Extactor;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +17,7 @@ public class Cli {
     private String[] args = null;
     private Options options = new Options();
 
-    public Cli(String[] args) {
+    public Cli(String[] args) throws MalformedURLException {
 
         this.args = args;
 
@@ -23,7 +25,7 @@ public class Cli {
         //https://www.w3schools.com/cssref/css_selectors.asp
         options.addOption("p", "directory", true, "Directory Path");
         options.addOption("q", "query", true, "css query \n" +
-                "for more info about css selectors visit https://www.w3schools.com/cssref/css_selectors.asp");
+                " For more info about css selectors visit "+new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
         options.addOption("o", "outer", true, "outer html off ");
         options.addOption("r", "result", true, "get result print on off");
 

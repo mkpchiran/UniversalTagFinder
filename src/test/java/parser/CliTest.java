@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import processor.ExtractorTest;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -13,7 +14,7 @@ import java.net.URL;
 public class CliTest {
 
     @Test
-    public void shouldparseTest(){
+    public void shouldparseTest() throws MalformedURLException {
         URL path = ExtractorTest.class.getClassLoader().getResource("test-files");
 
         String[] args={"-p",path.getPath(),"-q","div"};

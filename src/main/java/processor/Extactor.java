@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -89,6 +90,7 @@ public class Extactor {
         log.log(Level.INFO, bookPath + " has  " + total[0] + " Elements");
         log.log(Level.INFO, bookPath + " has  " + results.size() + " XHTML files with relevant elements");
         log.log(Level.INFO, bookPath + " has  " + totalFilecount[0] + " XHTMLFiles");
+        log.log(Level.INFO," For more info about css selectors visit "+new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
 
         return elementsList;
     }
