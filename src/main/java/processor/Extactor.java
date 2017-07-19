@@ -35,7 +35,7 @@ public class Extactor {
         final int[] totalFilecount = {0};
         List<Element> elementsList = new ArrayList<>();
         List<Result> results = new ArrayList<>();
-        Set<String> fileStrings = new HashSet<>();
+        ArrayList<String> containigFileName = new ArrayList<>();
         List<File> files = getFiles(bookPath, "XHTML");
         List<Comment> comments = new ArrayList<Comment>();
 
@@ -62,7 +62,7 @@ public class Extactor {
                             log.log(Level.INFO, p.getName() + " : \n" + s);
                             strings.add(s);
 
-                            fileStrings.add(p.getName());
+                            containigFileName.add(p.getName());
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 //                            System.out.println(p.getName()+" : "+element.toString());
                             result.setElements(strings);
@@ -135,7 +135,7 @@ public class Extactor {
                                 log.log(Level.INFO, p.getName() + " : \n" + element.toString());
                                 strings.add(element.toString());
                             }
-                            fileStrings.add(p.getName());
+                            containigFileName.add(p.getName());
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 //                            System.out.println(p.getName()+" : "+element.toString());
                             result.setElements(strings);
@@ -196,7 +196,7 @@ public class Extactor {
 //                        System.out.println(p.getName()+" has  "+elements.size()+" elements");
                                 log.log(Level.INFO, p.getName() + " has  " + elements.size() + " elements");
                                 System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-                                fileStrings.add(p.getName());
+                                containigFileName.add(p.getName());
 
                             }
                             if (elements.size() > 0)
@@ -218,8 +218,9 @@ public class Extactor {
         }
         System.out.println("@@@@@@@@@@@@@@@@      SUMMARY   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         log.log(Level.INFO, bookPath + " has  " + total[0] + " Elements");
-        log.log(Level.INFO, bookPath + " has  " + fileStrings.size() + " XHTML files with relevant elements");
-        log.log(Level.INFO, bookPath + " containing files are " + fileStrings.toString());
+        log.log(Level.INFO, bookPath + " has  " + results.size() + " XHTML files with relevant elements");
+        log.log(Level.INFO, bookPath + " has  " + containigFileName.size() + " XHTML files with elements equal with duplication occurancew");
+        log.log(Level.INFO, bookPath + " containing files are " + containigFileName.toString());
         log.log(Level.INFO, bookPath + " has  " + totalFilecount[0] + " XHTMLFiles");
         log.log(Level.INFO, " For more info about css selectors visit " + new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
 
