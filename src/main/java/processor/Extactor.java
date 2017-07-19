@@ -2,8 +2,10 @@ package processor;
 
 import model.Result;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Comment;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import java.io.File;
@@ -29,10 +31,63 @@ public class Extactor {
         PATTERN = pattern;
         final int[] total = {0};
         final int[] totalFilecount = {0};
-
         List<Element> elementsList = new ArrayList<>();
         List<Result> results = new ArrayList<>();
         List<File> files = getFiles(bookPath, "XHTML");
+        List<Comment> comments = new ArrayList<Comment>();
+
+        if (pattern.equalsIgnoreCase("#comment")) {
+
+            files.stream().forEach(p -> {
+
+                totalFilecount[0] += 1;
+                try {
+                    Result result = new Result();
+                    result.setFilename(p.getName());
+                    Document doc = Jsoup.parse(p, "UTF-8");
+                    List<Node> nodes = doc.childNodes();
+                    System.out.println("*************************************************************");
+
+                    ArrayList<String> strings = new ArrayList<>();
+
+                    nodes.forEach(node -> {
+
+                        int i = 0;
+                        while (i < node.childNodes().size()) {
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+                            Node child = node.childNode(i);
+                            if (child.nodeName().equals("#comment"))
+                                comments.add((Comment) child);
+                            {
+                                log.log(Level.INFO, p.getName() + " : \n" + child.toString());
+                                strings.add(child.toString());
+
+                            }
+                            i++;
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+                        }
+
+                    });
+                    total[0] += nodes.size();
+                    result.setElements(strings);
+                    results.add(result);
+                    System.out.println("*************************************************************");
+
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+//                        System.out.println(p.getName()+" has  "+elements.size()+" elements");
+                    log.log(Level.INFO, p.getName() + " has  " + nodes.size() + " elements");
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
+
+        }else
+
+
         files.stream().forEach(p -> {
                     try {
                         totalFilecount[0] += 1;
@@ -90,7 +145,7 @@ public class Extactor {
         log.log(Level.INFO, bookPath + " has  " + total[0] + " Elements");
         log.log(Level.INFO, bookPath + " has  " + results.size() + " XHTML files with relevant elements");
         log.log(Level.INFO, bookPath + " has  " + totalFilecount[0] + " XHTMLFiles");
-        log.log(Level.INFO," For more info about css selectors visit "+new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
+        log.log(Level.INFO, " For more info about css selectors visit " + new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
 
         return elementsList;
     }
