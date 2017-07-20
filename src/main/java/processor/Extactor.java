@@ -108,12 +108,17 @@ public class Extactor {
 
                     });
 
-                    ArrayList<Element> commentedElements = new ArrayList<>();
+                    ArrayList<String> commentedElements = new ArrayList<>();
                     fileCommentList.forEach(s -> {
-                        if (subQuery[0] != ""||subQuery[0] !=null) {
+                        if (!subQuery[0] .equalsIgnoreCase( "#comment")&&subQuery[0] != ""&&subQuery[0] !=null) {
                             doc.body().html(s);
                             Elements elements = doc.select(subQuery[0]);
-                            commentedElements.addAll(elements);
+                            elements.forEach(element -> {
+                                commentedElements.add(element.toString());
+
+                            });
+                        }else{
+                            commentedElements.add(s);
                         }
 
                     });
@@ -125,8 +130,8 @@ public class Extactor {
 
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                             if (withparent) {
-                                log.log(Level.INFO, p.getName() + " : \n" + element.parent().toString());
-                                strings.add(element.parent().toString());
+                                log.log(Level.INFO, p.getName() + " : \n" + element.toString());
+                                strings.add(element.toString());
                             } else {
                                 log.log(Level.INFO, p.getName() + " : \n" + element.toString());
                                 strings.add(element.toString());
@@ -269,12 +274,12 @@ public class Extactor {
         return strings;
     }
 
-//    public static void main(String[] args) {
-//        Extactor extactor = new Extactor();
-//        try {
-//            extactor.getElements("/home/chiranz/Documents/CITE/packages/ford_brown-dkc_v5_cite/OPS/", "#comment.img", true, false);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public static void main(String[] args) {
+        Extactor extactor = new Extactor();
+        try {
+            extactor.getElements("/home/chiranz/Documents/CITE/packages/ford_brown-dkc_v5_cite/OPS/", "#comment", true, false,Type.comment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
