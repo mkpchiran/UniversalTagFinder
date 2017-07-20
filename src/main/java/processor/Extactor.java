@@ -29,7 +29,7 @@ public class Extactor {
 
     private String PATTERN = ".";
 
-    public List<Element> getElements(String bookPath, String pattern, boolean withparent, boolean withresult) throws Exception {
+    public List<Element> getElements(String bookPath, String pattern, boolean withparent, boolean withresult,Type type) throws Exception {
         PATTERN = pattern;
         final int[] total = {0};
         final int[] totalFilecount = {0};
@@ -39,9 +39,9 @@ public class Extactor {
         List<File> files = getFiles(bookPath, "XHTML");
         List<Comment> comments = new ArrayList<Comment>();
 
-        if (pattern.startsWith("-")) {
+        if (type==Type.text) {
             final String[] subQuery = {null};
-            subQuery[0] = pattern.replace("-", "");
+            subQuery[0] = pattern;
             files.stream().forEach(p -> {
                 ArrayList<String> strings = new ArrayList<>();
 
@@ -88,20 +88,17 @@ public class Extactor {
                 }
             });
 
-        } else if (pattern.contains("#comment")) {
+        } else if (type==Type.comment||pattern.startsWith("#comment")) {
 
             final String[] subQuery = {null};
-            subQuery[0] = pattern.replace("#comment.", "");
-
+            subQuery[0] = pattern;//.replace("#comment", "");
             files.stream().forEach(p -> {
-
                 totalFilecount[0] += 1;
                 try {
                     Result result = new Result();
                     result.setFilename(p.getName());
                     Document doc = Jsoup.parse(p, "UTF-8");
                     List<Node> nodes = doc.childNodes();
-
                     ArrayList<String> strings = new ArrayList<>();
                     int commentsListSize = 0;
                     List<String> fileCommentList = new ArrayList<>();
@@ -113,7 +110,7 @@ public class Extactor {
 
                     ArrayList<Element> commentedElements = new ArrayList<>();
                     fileCommentList.forEach(s -> {
-                        if (subQuery[0] != null) {
+                        if (subQuery[0] != ""||subQuery[0] !=null) {
                             doc.body().html(s);
                             Elements elements = doc.select(subQuery[0]);
                             commentedElements.addAll(elements);
@@ -123,7 +120,6 @@ public class Extactor {
                     result.setElementCount(commentedElements.size());
 //                    result.setElements(strings);
                     commentedElements.forEach(element -> {
-
                         if (commentedElements.size() > 0) {
                             System.out.println("*************************************************************");
 

@@ -2,6 +2,7 @@ package parser;
 
 import org.apache.commons.cli.*;
 import processor.Extactor;
+import processor.Type;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,6 +29,7 @@ public class Cli {
                 " For more info about css selectors visit "+new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
         options.addOption("o", "outer", true, "outer html off ");
         options.addOption("r", "result", true, "get result print on off");
+        options.addOption("t", "type", true, "set query type text , comments or default xhtml");
 
     }
 
@@ -42,6 +44,7 @@ public class Cli {
                 help();
             boolean withParent = true;
             boolean withResut = false;
+            Type type=Type.xhtml;
             if (cmd.hasOption("o")) {
                 if (cmd.getOptionValue("o").equalsIgnoreCase("off")) {
                     withParent = false;
@@ -55,12 +58,22 @@ public class Cli {
 
             }
 
+
+            if (cmd.hasOption("t")) {
+                if (cmd.getOptionValue("t").equalsIgnoreCase("comment")) {
+                    type = Type.comment;
+                }else if (cmd.getOptionValue("t").equalsIgnoreCase("text")) {
+                    type = Type.text;
+                }
+
+            }
+
             if (cmd.hasOption("q") && cmd.hasOption("p")) {
 
                 try {
                     String path = cmd.getOptionValue("p");
                     String query = cmd.getOptionValue("q");
-                    new Extactor().getElements(path, query, withParent, withResut);
+                    new Extactor().getElements(path, query, withParent, withResut,type);
                     return true;
                 } catch (Exception e) {
                     log.log(Level.SEVERE, e.getMessage());
