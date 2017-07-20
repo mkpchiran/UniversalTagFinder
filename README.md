@@ -27,3 +27,4 @@ usage: Main
                         for more info about css selectors visit
                         https://www.w3schools.com/cssref/css_selectors.asp
  -r,--result <arg>      get result print on off
+ -t,--type <arg>        set query type text , comments or default xhtml
