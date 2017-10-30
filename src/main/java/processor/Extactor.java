@@ -7,6 +7,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
+import processor.extractor.BaseExtractor;
+import processor.extractor.CommentExtractor;
+import processor.extractor.TextExtractor;
+import processor.extractor.XHTMLExtractor;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +18,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -29,7 +31,11 @@ public class Extactor {
 
     private String PATTERN = ".";
 
-    public List<Element> getElements(String bookPath, String pattern, boolean withparent, boolean withresult,Type type) throws Exception {
+    public List<Element> getElements(String bookPath,
+                                     String pattern,
+                                     boolean withparent,
+                                     boolean withresult,
+                                     Type type) throws Exception {
         PATTERN = pattern;
         final int[] total = {0};
         final int[] totalFilecount = {0};
@@ -220,7 +226,7 @@ public class Extactor {
         System.out.println("@@@@@@@@@@@@@@@@      SUMMARY   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         log.log(Level.INFO, bookPath + " has  " + total[0] + " Elements");
         log.log(Level.INFO, bookPath + " has  " + results.size() + " XHTML files with relevant elements");
-        log.log(Level.INFO, bookPath + " has  " + containigFileName.size() + " XHTML files with elements equal with duplication occurancew");
+        log.log(Level.INFO, bookPath + " has  " + containigFileName.size() + " XHTML files with elements equal with duplication occurances");
         log.log(Level.INFO, bookPath + " containing files are " + containigFileName.toString());
         log.log(Level.INFO, bookPath + " has  " + totalFilecount[0] + " XHTMLFiles");
         log.log(Level.INFO, " For more info about css selectors visit " + new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
@@ -234,13 +240,13 @@ public class Extactor {
     }
 
     private List<String> getComments(Node node, File p, ArrayList<String> strings) {
-//        List<Comment> comments = new ArrayList<Comment>();
+//        List<CommentExtractor> comments = new ArrayList<CommentExtractor>();
         List<String> comments = new ArrayList<String>();
         int i = 0;
         while (i < node.childNodes().size()) {
             Node child = node.childNode(i);
             if (child.nodeName().equals("#comment")) {
-//                comments.add((Comment) child);
+//                comments.add((CommentExtractor) child);
 
                 comments.add(child.attr("comment"));
 //                log.log(Level.INFO, p.getName() + " : \n" + child.toString());
@@ -275,9 +281,11 @@ public class Extactor {
     }
 
     public static void main(String[] args) {
-        Extactor extactor = new Extactor();
+        BaseExtractor extactor = new XHTMLExtractor();
         try {
-            extactor.getElements("/home/chiranz/Documents/CITE/packages/ford_brown-dkc_v5_cite/OPS/", "#comment", true, false,Type.comment);
+            List<Result> result = extactor.getElements("/home/chiran/Downloads/baca_zinn-dif-10e_v5a-REVEL_moddesc.epub_FILES/OPS", "*", true);
+
+            System.out.println(result.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
