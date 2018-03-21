@@ -60,8 +60,11 @@ public abstract class BaseExtractor {
                 map(n -> n.toFile()).collect(Collectors.toList());
     }
 
-   public abstract List<Result> getElements(String bookPath,
+   public List<Result > getElements(String bookPath,
                                             String pattern,
                                             boolean withParent
-                                            ) throws IOException;
+                                            ) throws IOException{
+
+        return null;
+   }
 }

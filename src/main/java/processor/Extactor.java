@@ -7,10 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
-import processor.extractor.BaseExtractor;
-import processor.extractor.CommentExtractor;
-import processor.extractor.TextExtractor;
-import processor.extractor.XHTMLExtractor;
+import processor.extractor.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -280,14 +277,13 @@ public class Extactor {
         return strings;
     }
 
-    public static void main(String[] args) {
-        BaseExtractor extactor = new XHTMLExtractor();
-        try {
-            List<Result> result = extactor.getElements("/home/chiran/Downloads/baca_zinn-dif-10e_v5a-REVEL_moddesc.epub_FILES/OPS", "*", true);
-
-            System.out.println(result.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        BaseExtractor extactor = new XHTMLExtractor();
+//        try {
+//            new UniqueElement().getElementsMap("/home/chiran/Documents/Test/Titles/ORIGINAL/T03/hibbeler10-062316-pr");
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

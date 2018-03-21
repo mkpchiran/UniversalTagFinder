@@ -42,8 +42,8 @@ public class Cli {
 
             if (cmd.hasOption("h"))
                 help();
-            boolean withParent = true;
-            boolean withResut = false;
+            boolean withParent = false;
+            boolean withResult = false;
             Type type=Type.xhtml;
             if (cmd.hasOption("o")) {
                 if (cmd.getOptionValue("o").equalsIgnoreCase("off")) {
@@ -53,7 +53,7 @@ public class Cli {
 
             if (cmd.hasOption("r")) {
                 if (cmd.getOptionValue("r").equalsIgnoreCase("on")) {
-                    withResut = true;
+                    withResult = true;
                 }
 
             }
@@ -73,7 +73,7 @@ public class Cli {
                 try {
                     String path = cmd.getOptionValue("p");
                     String query = cmd.getOptionValue("q");
-                    new Extactor().getElements(path, query, withParent, withResut,type);
+                    new Extactor().getElements(path, query, withParent, withResult,type);
                     return true;
                 } catch (Exception e) {
                     log.log(Level.SEVERE, e.getMessage());
