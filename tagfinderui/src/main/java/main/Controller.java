@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javafx.scene.control.Alert.AlertType;
-
 public class Controller {
 
     @FXML
@@ -75,7 +73,7 @@ public class Controller {
                 Button[] buttons = new Button[1];
                 buttons[0] = new Button();
                 buttons[0].setCancelButton(true);
-                Alert alert = new Alert(AlertType.ERROR);
+//                Alert alert = new Alert(AlertType.ERROR);
             }
         }
 
