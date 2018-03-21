@@ -1,0 +1,3 @@
+rootProject.name = 'tagfinderui'
+include   ':tagfinder'
+project(':tagfinder').projectDir = new File(settingsDir, '../tagfinderapp')

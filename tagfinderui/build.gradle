@@ -1,0 +1,41 @@
+group 'org.sl'
+version '1.0.0'
+
+apply plugin: 'java'
+apply plugin: 'javafx-gradle-plugin'
+
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+
+dependencies{
+
+    compile project(':tagfinder')
+    compile group: 'org.jsoup', name: 'jsoup', version:'1.10.3'
+    compile group: 'commons-cli', name: 'commons-cli', version:'1.4'
+    compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
+
+}
+
+jfx {
+    // minimal requirement for jfxJar-task
+    mainClass = 'main.Main'
+    copyAdditionalAppResourcesToJar = true
+    appName = "Universal_Tag_Finder"
+    // minimal requirement for jfxNative-task
+    vendor = 'prathibhachiranthana@gmail.com'
+}
