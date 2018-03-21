@@ -28,3 +28,5 @@ usage: Main
                         https://www.w3schools.com/cssref/css_selectors.asp
  -r,--result <arg>      get result print on off
  -t,--type <arg>        set query type text , comments or default xhtml
+
+finish
