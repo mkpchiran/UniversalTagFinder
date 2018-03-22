@@ -1,13 +1,14 @@
-# TagFinder
-Jsoup query command line app
+# Universal Tag Finder
+
+1) tagfinder-1.0.0.jar
 
 A simple command line app to query XHTML content using jsoup.
 
 To build 
-mvn clean install
+./gradlew clean build
 
 To run
-java -jar target/TagFinder.jar -p [directory path] -q [css query]
+java -jar build/libs/tagfinder-1.0.0.jar -p [directory path] -q [css query]
 
 output
 
@@ -29,4 +30,19 @@ usage: Main
  -r,--result <arg>      get result print on off
  -t,--type <arg>        set query type text , comments or default xhtml
 
-finish
+2) tagfinderui-1.0.0.jar
+
+A simple jfx app to query XHTML content using jsoup.
+
+To build 
+cd tagfinderui
+./gradlew clean build
+
+To run
+java -jar build/libs/tagfinderui-1.0.0.jar 
+
+Also if need to build the native app.
+
+./gradlew jfxnative
+
+App will be at build/jfx/native
