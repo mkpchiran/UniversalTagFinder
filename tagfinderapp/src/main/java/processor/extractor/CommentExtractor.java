@@ -52,10 +52,11 @@ public class CommentExtractor extends BaseExtractor {
                 });
                 result.setElementCount(strings.size());
                 result.setFilename(p.getName());
+                result.setFilePath(p.getAbsolutePath());
                 result.setElements(strings);
                 if (strings.size() > 0) {
                     results.add(result);
-                    containingFileNames.add(p.getName());
+                    containingFileNames.add(p.getAbsolutePath());
                 }
             } catch (IOException e) {
                 e.printStackTrace();

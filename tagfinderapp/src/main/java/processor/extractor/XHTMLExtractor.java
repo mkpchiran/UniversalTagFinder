@@ -30,6 +30,7 @@ public class XHTMLExtractor extends BaseExtractor {
                         Elements elements = doc.select(PATTERN);
                         Result result = new Result();
                         result.setFilename(p.getName());
+                        result.setFilePath(p.getAbsolutePath());
                         elementsList.addAll(elements);
                         ArrayList<String> strings = new ArrayList<>();
                         elements.forEach(element -> {
@@ -47,7 +48,7 @@ public class XHTMLExtractor extends BaseExtractor {
                         if (elements.size() > 0) {
                             result.setElementCount(elements.size());
                             results.add(result);
-                            containingFileNames.add(p.getName());
+                            containingFileNames.add(p.getAbsolutePath());
 
                         }
                     } catch (IOException e) {

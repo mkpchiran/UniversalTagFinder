@@ -8,14 +8,25 @@ import java.util.ArrayList;
 public class Result {
     @Override
     public String toString() {
-        return "\nResult : \n" +
-                "Filename : '" + filename + '\'' +
-                "\nElementCount : " + elementCount +
-                "\nElements : " + elements +
-                '\n';
+        return "Result{" +
+                "filename='" + filename + '\'' +
+                ", filePath='" + filePath + '\'' +
+                ", elementCount=" + elementCount +
+                ", elements=" + elements +
+                '}';
     }
 
     String filename;
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    String filePath;
 
     public int getElementCount() {
         return elementCount;

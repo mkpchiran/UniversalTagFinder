@@ -39,9 +39,10 @@ public class TextExtractor extends BaseExtractor {
 
                 if (matchStrings.size() > 0) {
                     result.setFilename(p.getName());
+                    result.setFilePath(p.getAbsolutePath());
                     result.setElementCount(matchStrings.size());
                     results.add(result);
-                    containingFileNames.add(p.getName());
+                    containingFileNames.add(p.getAbsolutePath());
 
                 }
 
