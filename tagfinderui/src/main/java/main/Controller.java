@@ -6,15 +6,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Popup;
 import model.Result;
+//import org.apache.commons.io.FilenameUtils;
 import processor.extractor.BaseExtractor;
 import processor.extractor.CommentExtractor;
 import processor.extractor.TextExtractor;
 import processor.extractor.XHTMLExtractor;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +52,9 @@ public class Controller {
     @FXML
     TableView table;
 
+    @FXML
+    Button show;
+
 //    @FXML
 //    TableColumn indexCol, fileNameCol, elementCountCol, elementCol, elementNumberCol;
 
@@ -57,14 +68,27 @@ public class Controller {
         files.setVisible(false);
         files.getItems().add("Select");
         table.getItems().clear();
+        show.setVisible(false);
+
     }
 
     @FXML
     protected void process() {
 
         table.getColumns().clear();
-        if (directory == null) {
-            directory.setText(System.getProperty("user.home"));
+        if (directory == null || directory.getText().equalsIgnoreCase("")
+                ||directory.getText().equalsIgnoreCase("sample dir")   ) {
+
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            File selectedDirectory =directoryChooser.showDialog(new Popup());
+
+            if(selectedDirectory == null){
+            directory.setText("No Directory selected");
+            }else{
+            directory.setText(selectedDirectory.getAbsolutePath());
+            }
+
+//            directory.setText(System.getProperty("user.home"));
         }
 
         if (selector.getText().trim().equalsIgnoreCase("")) {
@@ -73,7 +97,7 @@ public class Controller {
                 Button[] buttons = new Button[1];
                 buttons[0] = new Button();
                 buttons[0].setCancelButton(true);
-//                Alert alert = new Alert(AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
             }
         }
 
@@ -104,7 +128,9 @@ public class Controller {
                             result1.getElementCount(),
                             e.replaceAll("\" ", "\"\n"),
                             index[1] += 1,
-                            index[0] += 1);
+                            index[0] += 1,
+                            result1.getFilePath()
+                            );
                     models.add(model);
                 });
                 ListCell node = new ListCell();
@@ -116,6 +142,7 @@ public class Controller {
                     FXCollections.observableArrayList(models);
             this.dataList = models;
             table.setItems(data);
+            table.getColumns().remove(table.getColumns().size()-1);
 //            grid.add(table, 0, 1);
             int totalElements = models.size();
             int totalFileCount = extractor.getTotalFileCount();
@@ -163,7 +190,7 @@ public class Controller {
         if (fileName != null && !fileName.equalsIgnoreCase("Select")) {
             String finalFileName = fileName;
             dataList.forEach(m -> {
-                if (m.getFileName().equalsIgnoreCase(finalFileName))
+                if (finalFileName.contains(m.getFileName()))
                     filteredList.add(m);
 
             });
@@ -171,6 +198,8 @@ public class Controller {
                     FXCollections.observableArrayList(filteredList);
             this.setColumns();
             table.setItems(data);
+            show.setVisible(true);
+            show.setText("open "+ fileName);
 
         } else {
             final ObservableList<ResultModel> data =
@@ -180,6 +209,22 @@ public class Controller {
 
         }
 
+    }
+
+    @FXML
+    protected void open(){
+        File file=new File(show.getText().replace("open ",""));
+        if( Desktop.isDesktopSupported() )
+        {
+            new Thread(() -> {
+                try {
+                    Desktop.getDesktop().open(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+        System.out.println("");
     }
 
     private void setColumns() {
@@ -329,15 +374,27 @@ public class Controller {
                     '}';
         }
 
+        public SimpleStringProperty getFilePathProperty() {
+            return filePath;
+        }
+
+        public void setFilePathProperty(SimpleStringProperty filePath) {
+            this.filePath = filePath;
+        }
+
+        SimpleStringProperty filePath;
         public ResultModel(String fileName,
                            int elementCount,
                            String element,
-                           int elementNumber, int index) {
+                           int elementNumber,
+                           int index,
+                           String filePath) {
             this.fileName = new SimpleStringProperty(fileName);
             this.elementCount = new SimpleIntegerProperty(elementCount);
             this.element = new SimpleStringProperty(element);
             this.elementNumber = new SimpleIntegerProperty(elementNumber);
             this.index = new SimpleIntegerProperty(index);
+            this.filePath = new SimpleStringProperty(filePath);
         }
 
         public int getIndex() {
