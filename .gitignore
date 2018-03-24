@@ -88,3 +88,8 @@ atlassian-ide-plugin.xml
 .idea
 
 /out/
+
+gradle/
+        gradlew
+        gradlew.bat
+

@@ -85,6 +85,9 @@ atlassian-ide-plugin.xml
 
 # oh-my-zsh gradle plugin
 .gradletasknamecache
-.idea
 
 /out/
+
+gradle/
+gradlew
+gradlew.bat
