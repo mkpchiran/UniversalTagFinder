@@ -16,6 +16,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Popup;
 import model.Result;
 //import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.FilenameUtils;
 import processor.extractor.BaseExtractor;
 import processor.extractor.CommentExtractor;
 import processor.extractor.TextExtractor;
@@ -34,6 +35,7 @@ public class Controller {
 
     @FXML
     ComboBox type;
+
     @FXML
     ComboBox files;
 
@@ -55,38 +57,42 @@ public class Controller {
     @FXML
     Button show;
 
+    @FXML
+    Button browse;
 //    @FXML
 //    TableColumn indexCol, fileNameCol, elementCountCol, elementCol, elementNumberCol;
 
     ArrayList<ResultModel> dataList;
 
     public void initialize() {
-        result.setText("Add Folder Path and query to start the Search");
+        result.setText("Set Directory Path and query to start the Search");
         type.getItems().addAll("XHTML",
                 "text", "XHTMLComments");
         type.getSelectionModel().selectFirst();
         files.setVisible(false);
         files.getItems().add("Select");
         table.getItems().clear();
+        table.getColumns().clear();
         show.setVisible(false);
-
+//        table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML
     protected void process() {
-
+        table.getItems().clear();
         table.getColumns().clear();
         if (directory == null || directory.getText().equalsIgnoreCase("")
-                ||directory.getText().equalsIgnoreCase("sample dir")   ) {
+                || directory.getText().equalsIgnoreCase("/Example/Directory/Path")
+                || directory.getText().equalsIgnoreCase("No Directory selected")) {
 
             DirectoryChooser directoryChooser = new DirectoryChooser();
-            File selectedDirectory =directoryChooser.showDialog(new Popup());
+            File selectedDirectory = directoryChooser.showDialog(new Popup());
 
-            if(selectedDirectory == null){
-            directory.setText("No Directory selected");
-            }else{
-            directory.setText(selectedDirectory.getAbsolutePath());
-            }
+                    if(selectedDirectory == null){
+                    directory.setText("No Directory selected");
+                    }else{
+                    directory.setText(selectedDirectory.getAbsolutePath());
+                    }
 
 //            directory.setText(System.getProperty("user.home"));
         }
@@ -137,12 +143,10 @@ public class Controller {
                 node.setText(result1.toString());
 //                result.setText(result.getText()+"\n"+result1.toString());
             });
-
             final ObservableList<ResultModel> data =
                     FXCollections.observableArrayList(models);
             this.dataList = models;
             table.setItems(data);
-            table.getColumns().remove(table.getColumns().size()-1);
 //            grid.add(table, 0, 1);
             int totalElements = models.size();
             int totalFileCount = extractor.getTotalFileCount();
@@ -156,7 +160,7 @@ public class Controller {
                 files.getItems().add("Select");
             extractor.getContainingFileNames().forEach(name -> {
                 if (!files.getItems().contains(name)) {
-                    files.getItems().add(name);
+                    files.getItems().add((name));
 
                 }
             });
@@ -168,7 +172,7 @@ public class Controller {
                     "File List " + totalContainingFileList;
             result.setText(resultString);
             table.setEditable(true);
-
+            table.getColumns().remove(table.getColumns().size() -1 );
             files.getSelectionModel().selectFirst();
             System.out.println(files.getItems().toString());
 
@@ -199,13 +203,14 @@ public class Controller {
             this.setColumns();
             table.setItems(data);
             show.setVisible(true);
-            show.setText("open "+ fileName);
-
+            show.setText("Open "+ FilenameUtils.getName(fileName));
+            show.setId("Open "+ fileName);
         } else {
             final ObservableList<ResultModel> data =
                     FXCollections.observableArrayList(dataList);
             this.setColumns();
             table.setItems(data);
+            show.setVisible(false);
 
         }
 
@@ -213,7 +218,7 @@ public class Controller {
 
     @FXML
     protected void open(){
-        File file=new File(show.getText().replace("open ",""));
+        File file=new File(show.getId().replace("Open ",""));
         if( Desktop.isDesktopSupported() )
         {
             new Thread(() -> {
@@ -226,6 +231,19 @@ public class Controller {
         }
         System.out.println("");
     }
+
+    @FXML
+    protected void browse(){
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(new Popup());
+
+        if(selectedDirectory == null){
+            directory.setText("No Directory selected");
+        }else{
+            directory.setText(selectedDirectory.getAbsolutePath());
+        }
+    }
+
 
     private void setColumns() {
         TableColumn indexCol = new TableColumn();
@@ -269,7 +287,7 @@ public class Controller {
         fileNameCol.setEditable(true);
         elementCountCol.setEditable(true);
         elementNumber.setEditable(true);
-
+        this.table.getColumns().clear();
         this.table.getColumns().addAll(
                 indexCol,
                 fileNameCol,
@@ -366,7 +384,7 @@ public class Controller {
         @Override
         public String toString() {
             return "ResultModel{" +
-                    "index=" + index +
+                    "  index=" + index +
                     ", fileName=" + fileName +
                     ", elementCount=" + elementCount +
                     ", element=" + element +

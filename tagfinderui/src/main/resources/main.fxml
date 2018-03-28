@@ -84,7 +84,7 @@
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                             </padding></ComboBox>
                         <Button fx:id="show" onMouseClicked="#open"
-                                prefHeight="26.0" prefWidth="150.0" text="open"
+                                prefWidth="200.0" text="open"
                                 GridPane.columnIndex="2" GridPane.columnSpan="2"
                                 GridPane.rowIndex="0" textOverrun="CENTER_ELLIPSIS">
                             <padding>
@@ -106,22 +106,25 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label text="Folder path" GridPane.rowIndex="0">
-                            <GridPane.margin>
-                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                            </GridPane.margin>
-                            <padding>
-                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                            </padding></Label>
                         <TextField fx:id="directory"
-                                   text="sample dir"
-                                   GridPane.rowIndex="1">
+                                   text="/Example/Directory/Path"
+                                   GridPane.rowIndex="0">
                             <GridPane.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                             </GridPane.margin>
                             <padding>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                             </padding></TextField>
+                        <GridPane alignment="BOTTOM_RIGHT" GridPane.rowIndex="1">
+                        <Button fx:id="browse" onMouseClicked="#browse" text="Browse"
+                                alignment="CENTER_LEFT" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                            </GridPane.margin>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding></Button>
+                        </GridPane>
                         <Label text="Text , Regex , Css selector to search" textAlignment="LEFT"
                                GridPane.rowIndex="2">
                             <GridPane.margin>
