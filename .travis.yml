@@ -66,7 +66,6 @@ before_install:
 script:
   - cd tagfinderui
   - chmod +x gradlew
-  - ./gradlew build --scan -s
   - ./gradlew jfxnative
 
 

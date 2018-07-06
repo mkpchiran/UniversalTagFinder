@@ -91,5 +91,4 @@ install:
   - cmd: cd tagfinderui
 
 build_script:
-  - cmd: gradlew.bat build --scan -s
   - cmd: gradlew.bat jfxnative
