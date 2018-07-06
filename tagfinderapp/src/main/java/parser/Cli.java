@@ -26,7 +26,7 @@ public class Cli {
         //https://www.w3schools.com/cssref/css_selectors.asp
         options.addOption("p", "directory", true, "Directory Path");
         options.addOption("q", "query", true, "css query \n" +
-                " For more info about css selectors visit "+new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
+                " For more info about css selectors visit "+ new URL("https://www.w3schools.com/cssref/css_selectors.asp"));
         options.addOption("o", "outer", true, "outer html off ");
         options.addOption("r", "result", true, "get result print on off");
         options.addOption("t", "type", true, "set query type text , comments or default xhtml");
@@ -44,6 +44,7 @@ public class Cli {
                 help();
             boolean withParent = false;
             boolean withResult = false;
+            String extention = "XHTML";
             Type type=Type.xhtml;
             if (cmd.hasOption("o")) {
                 if (cmd.getOptionValue("o").equalsIgnoreCase("off")) {
@@ -56,6 +57,10 @@ public class Cli {
                     withResult = true;
                 }
 
+            }
+
+            if (cmd.hasOption("e")) {
+                    extention = cmd.getOptionValue("t");
             }
 
 
@@ -73,7 +78,7 @@ public class Cli {
                 try {
                     String path = cmd.getOptionValue("p");
                     String query = cmd.getOptionValue("q");
-                    new Extactor().getElements(path, query, withParent, withResult,type);
+                    new Extactor().getElements(path, query, withParent, withResult,type,extention);
                     return true;
                 } catch (Exception e) {
                     log.log(Level.SEVERE, e.getMessage());

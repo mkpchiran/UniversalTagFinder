@@ -31,14 +31,14 @@ public class Extactor {
                                      String pattern,
                                      boolean withparent,
                                      boolean withresult,
-                                     Type type) throws Exception {
+                                     Type type,String extention) throws Exception {
         PATTERN = pattern;
         final int[] total = {0};
         final int[] totalFilecount = {0};
         List<Element> elementsList = new ArrayList<>();
         List<Result> results = new ArrayList<>();
         ArrayList<String> containigFileName = new ArrayList<>();
-        List<File> files = getFiles(bookPath, "XHTML");
+        List<File> files = getFiles(bookPath, extention);
         List<Comment> comments = new ArrayList<Comment>();
 
         if (type==Type.text) {
@@ -266,7 +266,6 @@ public class Extactor {
 
             if (lastindex != -1) {
                 if (lastindex != 0 && str.length() >= lastindex + match.length() + 3) {
-//                    System.out.println(str.substring(lastindex - 1, lastindex + match.length() + 3));
                     strings.add(str.substring(lastindex - 1, lastindex + match.length() + 3));
                 }
                 count++;
@@ -276,13 +275,4 @@ public class Extactor {
         return strings;
     }
 
-//    public static void main(String[] args) {
-//        BaseExtractor extactor = new XHTMLExtractor();
-//        try {
-//            new UniqueElement().getElementsMap("/home/chiran/Documents/Test/Titles/ORIGINAL/T03/hibbeler10-062316-pr");
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

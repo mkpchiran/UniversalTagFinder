@@ -17,9 +17,12 @@ import java.util.List;
 public class CommentExtractor extends BaseExtractor {
 
     @Override
-    public List<Result> getElements(String bookPath, String pattern, boolean withParent) throws IOException {
+    public List<Result> getElements(String bookPath,
+                                    String pattern,
+                                    boolean withParent,
+                                    String extension) throws IOException {
         PATTERN = pattern;
-        List<File> files = getFiles(bookPath, "XHTML");
+        List<File> files = getFiles(bookPath, extension);
         this.setTotalFileCount(files.size());
         files.stream().forEach(p -> {
             try {

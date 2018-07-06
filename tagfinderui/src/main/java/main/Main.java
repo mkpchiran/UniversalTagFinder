@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(Main.class.getResource("/main.fxml"));
 //root=FXMLLoader.load(new URL("src/main/sample.fxml"));
-        primaryStage.setTitle("Enigma Tag Finder");
+        primaryStage.setTitle("Universal Element Finder");
         primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.setResizable(true);
         primaryStage.show();

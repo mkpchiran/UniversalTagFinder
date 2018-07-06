@@ -19,7 +19,7 @@ public class ExtractorTest {
     public void getElements() throws Exception {
         URL path = ExtractorTest.class.getClassLoader().getResource("test-files");
         Extactor extactor = new Extactor();
-        List<Element> elements = extactor.getElements(path.getPath(),"p",true,false, Type.xhtml);
+        List<Element> elements = extactor.getElements(path.getPath(),"p",true,false, Type.xhtml,"XHTML");
         Assert.assertTrue(elements.size()>0);
 
     }

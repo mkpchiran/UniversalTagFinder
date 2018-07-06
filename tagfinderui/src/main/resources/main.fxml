@@ -26,17 +26,6 @@
                 <TableView fx:id="table" prefHeight="800.0" prefWidth="200.0"
                            tableMenuButtonVisible="true" GridPane.rowIndex="1">
                     <columns>
-
-                        <!--indexCol.setText("Index");
-                        fileNameCol.setText("File Name");
-                        elementCountCol.setText("Element Count");
-                        elementCol.setText("Element");
-                        elementNumber.setText("Element Number");-->
-                        <!--<TableColumn fx:id="indexCol" prefWidth="75.0" text="Index" />
-                        <TableColumn fx:id="fileNameCol" prefWidth="75.0" text="File Name" />
-                        <TableColumn fx:id="elementCountCol" prefWidth="75.0" text="Element Count" />
-                        <TableColumn fx:id="elementCol" prefWidth="600.0" text="Element" />
-                        <TableColumn fx:id="elementNumberCol" prefWidth="75.0" text="Element Number" />-->
                     </columns>
                     <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -44,6 +33,9 @@
                 </TableView>
                 <GridPane GridPane.rowIndex="3">
                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,6 +58,7 @@
                             <GridPane.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                             </GridPane.margin></Button>
+
                         <ComboBox fx:id="type" prefWidth="150.0" GridPane.columnIndex="0"
                                   GridPane.columnSpan="2" GridPane.rowIndex="0">
                             <padding>
@@ -74,8 +67,19 @@
                             <GridPane.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                             </GridPane.margin></ComboBox>
+
+
+                        <ComboBox fx:id="extension" prefWidth="150.0" GridPane.columnIndex="1"
+                                  GridPane.columnSpan="2" GridPane.rowIndex="0">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                            <GridPane.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </GridPane.margin></ComboBox>
+
                         <ComboBox fx:id="files" onAction="#filter" prefWidth="150.0"
-                                  GridPane.columnIndex="1" GridPane.columnSpan="2"
+                                  GridPane.columnIndex="2" GridPane.columnSpan="2"
                                   GridPane.rowIndex="0">
                             <GridPane.margin>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -85,7 +89,7 @@
                             </padding></ComboBox>
                         <Button fx:id="show" onMouseClicked="#open"
                                 prefWidth="200.0" text="open"
-                                GridPane.columnIndex="2" GridPane.columnSpan="2"
+                                GridPane.columnIndex="3" GridPane.columnSpan="2"
                                 GridPane.rowIndex="0" textOverrun="CENTER_ELLIPSIS">
                             <padding>
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

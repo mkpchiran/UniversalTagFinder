@@ -62,8 +62,8 @@ public abstract class BaseExtractor {
 
    public List<Result> getElements(String bookPath,
                                    String pattern,
-                                   boolean withParent
-                                            ) throws IOException{
+                                   boolean withParent,
+                                   String extention ) throws IOException{
 
         return null;
    }
