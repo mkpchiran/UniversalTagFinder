@@ -92,3 +92,5 @@ install:
 
 build_script:
   - cmd: gradlew.bat jfxnative
+  - cmd: cd C:\projects\universaltagfinder\tagfinderui\build\jfx\native
+  - cmd: dir 
