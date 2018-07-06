@@ -1,5 +1,4 @@
 language: java
-install: gradle wrapper --gradle-version 4.2
 matrix:
   include:
     ## kept in sync with javafx-maven-plugin for easier comparision
