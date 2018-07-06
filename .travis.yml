@@ -81,8 +81,8 @@ deploy:
   skip_cleanup: true
   on:
     repo: mkpchiran/UniversalTagFinder
-    branches:    # ← new!
-      only:      # ← new!
-        - v1.0.0 # ← new!
+    tags: true
+    branch: master
+    all_branches: true	
 
 
