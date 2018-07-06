@@ -67,6 +67,19 @@ script:
   - cd tagfinderui
   - chmod +x gradlew
   - ./gradlew jfxnative
-
+  - ls /home/travis/build/mkpchiran/UniversalTagFinder/tagfinderui/build/jfx/native/
+before_deploy:
+      # Set up git user name and tag this commit
+      - git config --local user.name "mkpchiran"
+      - git config --local user.email "mkpchiran@gmail.com"
+      - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+deploy:
+  provider: releases
+  api_key:
+    secure:  44d38e7c57b82fbebfcf444baee58c7e5570d7e0
+  file: /home/travis/build/mkpchiran/UniversalTagFinder/tagfinderui/build/jfx/native/**/*
+  skip_cleanup: true
+  on:
+    tags: true
 
 
