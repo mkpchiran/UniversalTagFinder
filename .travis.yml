@@ -67,7 +67,6 @@ script:
   - cd tagfinderui
   - chmod +x gradlew
   - ./gradlew jfxnative
-  - cd build/jfx/native/
   - ls
 before_deploy:
       # Set up git user name and tag this commit
@@ -76,13 +75,14 @@ before_deploy:
       - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
   provider: releases
-  api_key: 5737543c12610b9f399f6a2a09737f7718db055c
+  user: "mkpchiran"
+  password: "Nokia@2310"
   file: build/jfx/native/**/*
   skip_cleanup: true
   on:
     repo: mkpchiran/UniversalTagFinder
     tags: true
-    branch: master
+    branch: release/v1.0.0
     all_branches: true	
 
 
