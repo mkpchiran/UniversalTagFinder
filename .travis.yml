@@ -76,7 +76,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure:  44d38e7c57b82fbebfcf444baee58c7e5570d7e0
+    secure: 5737543c12610b9f399f6a2a09737f7718db055c
   file: build/jfx/native/**/*
   skip_cleanup: true
   on:
