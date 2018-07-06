@@ -67,7 +67,7 @@ script:
   - cd tagfinderui
   - chmod +x gradlew
   - ./gradlew jfxnative
-  - ls /home/travis/build/mkpchiran/UniversalTagFinder/tagfinderui/build/jfx/native/
+  - ls build/jfx/native/
 before_deploy:
       # Set up git user name and tag this commit
       - git config --local user.name "mkpchiran"
