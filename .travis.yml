@@ -79,5 +79,10 @@ deploy:
     secure:  44d38e7c57b82fbebfcf444baee58c7e5570d7e0
   file: /home/travis/build/mkpchiran/UniversalTagFinder/tagfinderui/build/jfx/native/**/*
   skip_cleanup: true
+  on:
+    repo: mkpchiran/UniversalTagFinder
+    branches:    # ← new!
+      only:      # ← new!
+        - v1.0.0 # ← new!
 
 
