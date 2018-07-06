@@ -75,8 +75,7 @@ before_deploy:
       - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
   provider: releases
-  api_key:
-    secure: 5737543c12610b9f399f6a2a09737f7718db055c
+  api_key: 5737543c12610b9f399f6a2a09737f7718db055c
   file: build/jfx/native/**/*
   skip_cleanup: true
   on:
