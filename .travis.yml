@@ -80,6 +80,6 @@ deploy:
   file: /home/travis/build/mkpchiran/UniversalTagFinder/tagfinderui/build/jfx/native/**/*
   skip_cleanup: true
   on:
-    tags: true
+    tags: false
 
 
