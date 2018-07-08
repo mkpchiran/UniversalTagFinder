@@ -110,15 +110,12 @@ environment:
     # - TOOLCHAIN: "mingw"
     #   CONFIG: Debug
 
-install:
-  # Install ninja
-  - cmd: cd tagfinderui
-
 build_script:
+  - cmd: cd tagfinderui
   - cmd: gradlew.bat jfxnative
   - cmd: cd C:\projects\universaltagfinder\tagfinderui\build\jfx\native
   - cmd: dir 
-  
+
 artifacts:
   - path: C:\projects\universaltagfinder\tagfinderui\build\dist\jar\lib
     name: lib
