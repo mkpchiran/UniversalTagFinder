@@ -1,5 +1,5 @@
 # Windows (https://github.com/travis-ci-tester/toolchain-table)
-os: Windows Server 2012
+os: Windows Server 2017
 install:
   - cinst cmake.portable wget 7zip.commandline
   # Install Windows Installer XML (WiX) to create installer with cpack
@@ -109,11 +109,11 @@ build_script:
   - cmd: dir 
 
 artifacts:
-  - path: ..\dist\jar\lib
+  - path: C:\projects\universaltagfinder\tagfinderui\build\dist\jar\lib
     name: lib
 
-  - path: ..\dist\jar\*.jar
+  - path: C:\projects\universaltagfinder\tagfinderui\build\dist\jar\*.jar
     name: jar
 
-  - path: ..\dist\native\*
+  - path: C:\projects\universaltagfinder\tagfinderui\build\dist\native\*
     name: native
