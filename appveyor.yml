@@ -16,9 +16,6 @@ branches:
   - master
 skip_tags: true
 
-build_script:
-  - gradlew.bat jfxNative --info --no-daemon --stacktrace
-
 test_script:
   - gradlew.bat check --info --no-daemon --stacktrace
 
