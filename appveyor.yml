@@ -118,10 +118,7 @@ build_script:
   - cmd: gradlew.bat jfxnative
   - cmd: cd C:\projects\universaltagfinder\tagfinderui\build\jfx\native
   - cmd: dir 
-
-matrix:
-  fast_finish: true
-
+  
 artifacts:
   - path: C:\projects\universaltagfinder\tagfinderui\build\dist\jar\lib
     name: lib
