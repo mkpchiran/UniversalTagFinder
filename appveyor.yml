@@ -15,10 +15,6 @@ branches:
   only:
   - master
 skip_tags: true
-
-test_script:
-  - gradlew.bat check --info --no-daemon --stacktrace
-
 cache:
   - C:\Users\appveyor\.gradle
 environment:
@@ -108,10 +104,10 @@ environment:
     #   CONFIG: Debug
 
 build_script:
-  - cmd: cd tagfinderui
+  - cmd: cd C:\projects\universaltagfinder\tagfinderui\tagfinderui
   - cmd: gradlew.bat jfxnative
   - cmd: cd C:\projects\universaltagfinder\tagfinderui\build\jfx\native
-  - cmd: dir 
+  - cmd: dir /s /b 
 
 artifacts:
   - path: C:\projects\universaltagfinder\tagfinderui\build\dist\jar\lib
