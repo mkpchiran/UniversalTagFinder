@@ -109,11 +109,11 @@ build_script:
   - cmd: dir /s /b 
 
 artifacts:
-  - path: C:\projects\universaltagfinder\tagfinderui\build\dist\jar\lib
+  - path: ..\..\dist\jar\lib
     name: lib
 
-  - path: C:\projects\universaltagfinder\tagfinderui\build\dist\jar\*.jar
+  - path: ..\..\dist\jar\*.jar
     name: jar
 
-  - path: C:\projects\universaltagfinder\tagfinderui\build\dist\native\*
+  - path: ..\..\dist\native\*
     name: native
