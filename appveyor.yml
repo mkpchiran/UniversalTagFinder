@@ -1,5 +1,5 @@
 # Windows (https://github.com/travis-ci-tester/toolchain-table)
-os: Windows Server 2017
+os: Windows Server 2016
 install:
   - cinst cmake.portable wget 7zip.commandline
   # Install Windows Installer XML (WiX) to create installer with cpack
