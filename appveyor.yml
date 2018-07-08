@@ -103,9 +103,9 @@ environment:
     #   CONFIG: Debug
 
 build_script:
-  - cmd: cd C:\projects\universaltagfinder\tagfinderui\tagfinderui
+  - cmd: cd tagfinderui
   - cmd: gradlew.bat jfxnative
-  - cmd: cd C:\projects\universaltagfinder\tagfinderui\build\jfx\native
+  - cmd: cd build\jfx\native
   - cmd: dir /s /b 
 
 artifacts:
