@@ -109,11 +109,11 @@ build_script:
   - cmd: dir 
 
 artifacts:
-  - path: ..\..\dist\jar\lib
+  - path: ..\dist\jar\lib
     name: lib
 
-  - path: ..\..\dist\jar\*.jar
+  - path: ..\dist\jar\*.jar
     name: jar
 
-  - path: ..\..\dist\native\*
+  - path: ..\dist\native\*
     name: native
