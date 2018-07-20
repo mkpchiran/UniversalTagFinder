@@ -107,13 +107,8 @@ build_script:
   - cmd: cd build\jfx\native
   - cmd: dir 
   - cmd: cd ..\..\..
+  - cmd: dir
 
 artifacts:
-  - path: tagfinderui\build\dist\jar\lib
+  - path: build\jfx\native\Universal_Tag_Finder-1.0.exe
     name: lib
-
-  - path: tagfinderui\build\dist\jar\*.jar
-    name: jar
-
-  - path: tagfinderui\build\dist\native\*
-    name: native
