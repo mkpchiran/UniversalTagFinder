@@ -108,7 +108,3 @@ build_script:
   - cmd: dir 
   - cmd: cd ..\..\..
   - cmd: dir
-
-artifacts:
-  - path: build\jfx\native\Universal_Tag_Finder-1.0.exe
-    name: lib
